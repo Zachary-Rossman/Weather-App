@@ -1,11 +1,3 @@
-// Steps for project
-
-// STEP 1
-// Capture user's input and put it into API link
-
-// STEP 2
-// Build fetch for API data
-
 // STEP 3
 // Build error pages
 
@@ -20,6 +12,9 @@
 
 // Global Variables
 let body = document.querySelector(`#body`);
+let currentWeatherDiv = document.querySelector(`#current-weather-div`);
+let forecastDiv = document.querySelector(`#forecast-div`);
+let locationDiv = document.querySelector(`#location-div`)
 let searchBtn = document.querySelector(`#search-button`);
 let searchForm = document.querySelector(`#search-form`);
 let searchInput = document.querySelector(`#search-input`);
