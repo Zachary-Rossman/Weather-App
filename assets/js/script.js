@@ -36,9 +36,23 @@ let handleFormSubmit = function (Event) {
 
     // Define typed value by user
     let searchValue = searchInput.value;
+    
+    // Fetch API based on user's input
+    fetch(`http://api.weatherapi.com/v1/forecast.json?key=aab4a765800244589bc04603251412&q=${searchValue}&days=3&aqi=no&alerts=no`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+        // Define location data, current weather, and a 3 day forecast
+        let locationData = data.location;
+        let currentWeatherData = data.current;
+        let forecastWeatherData = data.forecast;
 
-    // Console log for user
-    console.log(searchValue);
+        // Console logs for testing
+        console.log(locationData);
+        console.log(currentWeatherData);
+        console.log(forecastWeatherData);
+    })
 }
 
 // Functions calls/Event listeners
