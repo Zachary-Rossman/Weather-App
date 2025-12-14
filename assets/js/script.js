@@ -29,6 +29,8 @@ let handleFormSubmit = function (Event) {
     // Prevents page from refreshing
     Event.preventDefault();
 
+    // Clear all previous results
+
     // Define typed value by user
     let searchValue = searchInput.value;
     
@@ -38,16 +40,29 @@ let handleFormSubmit = function (Event) {
       return response.json();
     })
     .then(function (data) {
-        // Define location data, current weather, and a 3 day forecast
-        let locationData = data.location;
-        let currentWeatherData = data.current;
-        let forecastWeatherData = data.forecast;
-
-        // Console logs for testing
-        console.log(locationData);
-        console.log(currentWeatherData);
-        console.log(forecastWeatherData);
+        console.log(data);
+        displayResults(data);
     })
+}
+
+let displayResults = function(data) {
+    // Define location data, current weather, and a 3 day forecast
+    let locationData = data.location;
+    let currentWeatherData = data.current;
+    let forecastWeatherData = data.forecast;
+
+    // Define location details to be appended later (Country will later be filtered to ONLY show U.S. based locations!!!)
+
+    // Define current weather details to be appended later
+
+    // Define forecast details to be appended later
+
+    // Console logs for testing
+    console.log(locationData);
+    console.log(currentWeatherData);
+    console.log(forecastWeatherData);
+
+    // Filter user's input with if/else statement. If there is no input, display an error. If there are no results, display an error. If results are outside of United States, display error with no results. If there are results, display results
 }
 
 // Functions calls/Event listeners
