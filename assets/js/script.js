@@ -1,6 +1,3 @@
-// STEP 3
-// Build error pages
-
 // STEP 4
 // Build DOM display of results based on user's filters
 
