@@ -58,8 +58,6 @@ let handleFormSubmit = function (Event) {
                 return response.json();
             })
             .then(function (data) {
-                console.log(data);
-                
                 // Call function to display the results onto the page
                 displayResults(data);
             })
@@ -95,16 +93,99 @@ let displayResults = function(data) {
         let currentWeatherData = data.current;
         let forecastWeatherData = data.forecast;
 
-        // Define location details to be appended later (Country will later be filtered to ONLY show U.S. based locations!!!)
+        // Define location details to be appended (Country will later be filtered to ONLY show U.S. based locations!!!)
+        let cityName = locationData.name;
+        let country = locationData.country;
+        let localTime = locationData.localtime;
+        let state = locationData.region;
 
-        // Define current weather details to be appended later
+        // Condition is ONLY to be used for icon and text!!!
+        let currentConditionData = currentWeatherData.condition;
+        
+        // Define current weather details to be appended 
+        let currentCondition = currentConditionData.text;
+        let currentIcon = currentConditionData.icon;
+        let currentCloudCover = currentWeatherData.cloud;
+        let currentDewPoint = currentWeatherData.dewpoint_f;
+        let currentFeelsLike = currentWeatherData.feelslike_f;
+        let currentHeatIndex = currentWeatherData.heatindex_f;
+        let currentHumidity = currentWeatherData.humidity;
+        let currentLastUpdated = currentWeatherData.last_updated;
+        let currentPressure = currentWeatherData.pressure_in;
+        let currentTemp = currentWeatherData.temp_f;
+        let currentUVIndex = currentWeatherData.uv;
+        let currentVisibility = currentWeatherData.vis_miles;
+        let currentWindDirection = currentWeatherData.wind_dir;
+        let currentWindGust = currentWeatherData.gust_mph;
+        let currentWindSpeed = currentWeatherData.wind_mph;
+        let currentWindChill = currentWeatherData.windchill_f;
+        
 
-        // Define forecast details to be appended later
+        // Define forecast details to be appended
 
-        // Console logs for testing
-        console.log(locationData);
-        console.log(currentWeatherData);
-        console.log(forecastWeatherData);
+        // Define forecast days
+        let dayArray = forecastWeatherData.forecastday;
+
+        // Define Specific Days
+        let day1 = dayArray[0];
+        let day2 = dayArray[1];
+        let day3 = dayArray[2];
+
+        // Define Weather Data For Every Day
+        let day1WeatherData = day1.day;
+        let day2WeatherData = day2.day;
+        let day3WeatherData = day3.day;
+
+        // Define Day 1 (Next Day) Weather Details
+        let day1LowTemp = day1WeatherData.mintemp_f;
+        let day1HighTemp = day1WeatherData.maxtemp_f;
+        let day1Humidity = day1WeatherData.avghumidity;
+        let day1RainChance = day1WeatherData.daily_chance_of_rain;
+        let day1SnowChance = day1WeatherData.daily_chance_of_snow;
+        let day1TotalPrecipitation = day1WeatherData.totalprecip_in;
+        let day1Visibility = day1WeatherData.avgvis_miles;
+        let day1UVIndex = day1WeatherData.uv;
+
+        
+        
+        // Day 1 Condition
+        let day1ConditionData = day1WeatherData.condition;
+        let day1ConditionText = day1ConditionData.text;
+        let day1conditionIcon = day1ConditionData.icon;
+
+        // Define Day 2 Weather Details
+        let day2LowTemp = day2WeatherData.mintemp_f;
+        let day2HighTemp = day2WeatherData.maxtemp_f;
+        let day2Humidity = day2WeatherData.avghumidity;
+        let day2RainChance = day2WeatherData.daily_chance_of_rain;
+        let day2SnowChance = day2WeatherData.daily_chance_of_snow;
+        let day2TotalPrecipitation = day2WeatherData.totalprecip_in;
+        let day2Visibility = day2WeatherData.avgvis_miles;
+        let day2UVIndex = day2WeatherData.uv;
+
+        
+        
+        // Day 2 Condition
+        let day2ConditionData = day2WeatherData.condition;
+        let day2ConditionText = day2ConditionData.text;
+        let day2conditionIcon = day2ConditionData.icon;
+
+        // Define Day 3 Weather Details
+        let day3LowTemp = day3WeatherData.mintemp_f;
+        let day3HighTemp = day3WeatherData.maxtemp_f;
+        let day3Humidity = day3WeatherData.avghumidity;
+        let day3RainChance = day3WeatherData.daily_chance_of_rain;
+        let day3SnowChance = day3WeatherData.daily_chance_of_snow;
+        let day3TotalPrecipitation = day3WeatherData.totalprecip_in;
+        let day3Visibility = day3WeatherData.avgvis_miles;
+        let day3UVIndex = day3WeatherData.uv;
+
+        
+        
+        // Day 3 Condition
+        let day3ConditionData = day3WeatherData.condition;
+        let day3ConditionText = day3ConditionData.text;
+        let day3conditionIcon = day3ConditionData.icon;
     }
 }
 
