@@ -1,12 +1,3 @@
-// STEP 4
-// Build DOM display of results based on user's filters
-
-// STEP 5
-// Make sure page clears with every results without refreshing, and make sure project is fully functional
-
-// STEP 6
-// Style DOM
-
 // Global Variables
 let body = document.querySelector(`#body`);
 let currentWeatherDiv = document.querySelector(`#current-weather-div`);
@@ -69,6 +60,7 @@ let displayResults = function(data) {
     // Check if data returned an error
     if(data.error) {
         // Clear page of any previous results
+        errorDiv.replaceChildren("");
         locationDiv.replaceChildren("");
         currentWeatherDiv.replaceChildren("");
         forecastDiv.replaceChildren("");
@@ -119,9 +111,6 @@ let displayResults = function(data) {
         let currentWindGust = currentWeatherData.gust_mph;
         let currentWindSpeed = currentWeatherData.wind_mph;
         let currentWindChill = currentWeatherData.windchill_f;
-        
-
-        // Define forecast details to be appended
 
         // Define forecast days
         let dayArray = forecastWeatherData.forecastday;
@@ -186,6 +175,128 @@ let displayResults = function(data) {
         let day3ConditionData = day3WeatherData.condition;
         let day3ConditionText = day3ConditionData.text;
         let day3conditionIcon = day3ConditionData.icon;
+
+        // If statement to filter only locations within the United States
+        console.log(country)
+        if (country !== "United States of America") {
+            // Clear page of any previous results
+            errorDiv.replaceChildren("");
+            locationDiv.replaceChildren("");
+            currentWeatherDiv.replaceChildren("");
+            forecastDiv.replaceChildren("");
+            
+            // Define error on DOM
+            let errorBox = document.createElement("div");
+
+            // Error styling
+            errorBox.className = "bg-red-100 border border-red-300 text-red-900 rounded-xl p-6 mx-auto mt-6 max-w-xl text-center shadow";
+        
+            // Define errorBox html content
+            errorBox.innerHTML = `
+            <h2 class="text-2xl font-bold mb-2">⚠️ Error</h2>
+            <p class="text-lg">Error: Please search for a valid location within the United States of America!</p>
+            `;
+            
+            // Append errorBox to DOM
+            errorDiv.appendChild(errorBox);
+        } else {
+            // Clear page of any previous results
+            locationDiv.replaceChildren("");
+            currentWeatherDiv.replaceChildren("");
+            forecastDiv.replaceChildren("");
+
+            // Define location, current weather, and forecast on DOM
+            let locationCard = document.createElement(`div`);
+            let currentWeatherCard = document.createElement(`div`);
+            let forecastCard = document.createElement(`div`);
+            
+            // Define html content of locationCard
+            locationCard.innerHTML = `
+            <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-xl mx-auto mt-6 shadow text-center">
+            <h2 class="text-2xl font-bold mb-2">${cityName}, ${state}</h2>
+            <p class="text-lg">${country}</p>
+            <p class="text-sm text-gray-600 mt-1">Local Time: ${localTime}</p>
+            </div>
+            `;
+
+            // Define html content of currentWeatherCard
+            currentWeatherCard.innerHTML = `
+            <div class="bg-white border rounded-xl p-6 max-w-xl mx-auto mt-6 shadow">
+            <div class="flex items-center justify-between mb-4">
+            <div>
+            <h3 class="text-xl font-bold">Current Weather</h3>
+            <p class="text-gray-600">${currentCondition}</p>
+            </div>
+            <img src="https:${currentIcon}" alt="${currentCondition}">
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 text-sm">
+            <p><strong>Temperature:</strong> ${currentTemp}°F</p>
+            <p><strong>Feels Like:</strong> ${currentFeelsLike}°F</p>
+            <p><strong>Humidity:</strong> ${currentHumidity}%</p>
+            <p><strong>Cloud Cover:</strong> ${currentCloudCover}%</p>
+            <p><strong>Wind:</strong> ${currentWindSpeed} mph (${currentWindDirection})</p>
+            <p><strong>Wind Gust:</strong> ${currentWindGust} mph</p>
+            <p><strong>Pressure:</strong> ${currentPressure} in</p>
+            <p><strong>Visibility:</strong> ${currentVisibility} miles</p>
+            <p><strong>UV Index:</strong> ${currentUVIndex}</p>
+            <p><strong>Dew Point:</strong> ${currentDewPoint}°F</p>
+            <p><strong>Heat Index:</strong> ${currentHeatIndex}°F</p>
+            <p><strong>Wind Chill:</strong> ${currentWindChill}°F</p>
+            </div>
+            
+            <p class="text-xs text-gray-500 mt-4">Last Updated: ${currentLastUpdated}</p>
+            </div>
+            `;
+
+            // Define html content of forecastCard
+            forecastCard.innerHTML = `
+            <div class="max-w-5xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-gray-50 border rounded-xl p-5 shadow text-center">
+            <h4 class="font-bold text-lg mb-2">Tomorrow</h4>
+            <img class="mx-auto" src="https:${day1conditionIcon}" alt="${day1ConditionText}">
+            <p class="mb-2">${day1ConditionText}</p>
+            <p>High: ${day1HighTemp}°F | Low: ${day1LowTemp}°F</p>
+            <p>Humidity: ${day1Humidity}%</p>
+            <p>Rain: ${day1RainChance}% | Snow: ${day1SnowChance}%</p>
+            <p>Precipitation: ${day1TotalPrecipitation} in</p>
+            <p>Visibility: ${day1Visibility} miles</p>
+            <p>UV Index: ${day1UVIndex}</p>
+            </div>
+            
+            <div class="bg-gray-50 border rounded-xl p-5 shadow text-center">
+            <h4 class="font-bold text-lg mb-2">${day2.date}</h4>
+            <img class="mx-auto" src="https:${day2conditionIcon}" alt="${day2ConditionText}">
+            <p class="mb-2">${day2ConditionText}</p>
+            <p>High: ${day2HighTemp}°F | Low: ${day2LowTemp}°F</p>
+            <p>Humidity: ${day2Humidity}%</p>
+            <p>Rain: ${day2RainChance}% | Snow: ${day2SnowChance}%</p>
+            <p>Precipitation: ${day2TotalPrecipitation} in</p>
+            <p>Visibility: ${day2Visibility} miles</p>
+            <p>UV Index: ${day2UVIndex}</p>
+            </div>
+
+            <div class="bg-gray-50 border rounded-xl p-5 shadow text-center">
+            <h4 class="font-bold text-lg mb-2">${day3.date}</h4>
+            <img class="mx-auto" src="https:${day3conditionIcon}" alt="${day3ConditionText}">
+            <p class="mb-2">${day3ConditionText}</p>
+            <p>High: ${day3HighTemp}°F | Low: ${day3LowTemp}°F</p>
+            <p>Humidity: ${day3Humidity}%</p>
+            <p>Rain: ${day3RainChance}% | Snow: ${day3SnowChance}%</p>
+            <p>Precipitation: ${day3TotalPrecipitation} in</p>
+            <p>Visibility: ${day3Visibility} miles</p>
+            <p>UV Index: ${day3UVIndex}</p>
+            </div>
+
+            </div>
+            `;
+            
+            // Append all content to DOM
+            locationDiv.appendChild(locationCard);
+            currentWeatherDiv.appendChild(currentWeatherCard);
+            forecastDiv.appendChild(forecastCard);
+        }
     }
 }
 
